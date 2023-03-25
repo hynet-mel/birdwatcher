@@ -18,7 +18,9 @@ ADD . .
 RUN make
 
 # Add birdwatcher to bird
-FROM ehlers/bird2
+FROM alpine:edge
+
+RUN apk add --no-cache bird bash && mkdir -p /var/run/bird && mkdir -p /etc/bird
 
 COPY --from=app /src/birdwatcher/birdwatcher-linux-amd64 /usr/bin/birdwatcher
 ADD etc/birdwatcher/birdwatcher.conf /etc/birdwatcher/birdwatcher.conf
